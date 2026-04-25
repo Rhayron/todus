@@ -1,0 +1,15 @@
+# Dev compose: mounts source as volume + runs Vite dev server with HMR
+# Usage: docker compose -f docker-compose.dev.yml up -d
+
+services:
+  todus-dev:
+    image: node:20-alpine
+    container_name: todus-dev
+    working_dir: /app
+    volumes:
+      - .:/app                        # mounts entire project (live changes)
+      - /app/node_modules             # keeps node_modules inside container
+    ports:
+      - "5173:5173"                   # Vite default port
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    restart: unless-stopped

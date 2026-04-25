@@ -1,0 +1,8 @@
+services:
+  todus:
+    build: .
+    image: todus:latest
+    container_name: todus-web
+    ports:
+      - "80:80"        # access via http://<your-ip>
+    restart: unless-stopped
